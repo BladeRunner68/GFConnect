@@ -69,6 +69,8 @@ TBD
 
 ### Work To be done
 
+- WIFI control bridge
+
 - More commands?
 
 - Full Recipe mode
@@ -80,6 +82,8 @@ TBD
 - Node.js script
 
 - Node-red workflow
+
+- Brewfather/Beersmith etc. Brewing application integration
 
 
 ## Authors
