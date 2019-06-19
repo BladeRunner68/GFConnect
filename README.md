@@ -37,7 +37,7 @@ Node-red workflow
 
 ## Authors
 
-* **Simon Taylor** - *Initial work* - [BladeRunner68](https://github.com/BladeRunner68)
+* **Simon Taylor** - *Initial Concept/POC script* - [BladeRunner68](https://github.com/BladeRunner68)
 
 See also the list of [contributors](https://github.com/BladeRunner68/GFConnect/contributors) who participated in this project.
 
