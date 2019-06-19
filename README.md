@@ -1,4 +1,6 @@
 # GFConnect
+
+
 GF Connect Bluetooth Controller Proof of concept
 
 <b> Use at your own risk! </b>
@@ -22,17 +24,17 @@ TBD
 
 ### Work To be done
 
-More commands?
+- More commands?
 
-Full Recipe mode
+- Full Recipe mode
 
-Python refactor - maybe with threading so this is 'callable/triggerable'
+- Python refactor - maybe with threading so this is 'callable/triggerable'
 
-RPI image
+- RPI image
 
-Node.js script
+- Node.js script
 
-Node-red workflow
+- Node-red workflow
 
 
 ## Authors
