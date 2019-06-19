@@ -1,6 +1,8 @@
 # GFConnect
 GF Connect Bluetooth Controller Proof of concept
 
+<b> Use at your own risk! </b>
+
 
 ### Prerequisites
 Raspberry Pi (v2 with bluetooth dongle, V3) or Linux host
