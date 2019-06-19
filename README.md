@@ -23,6 +23,31 @@ Tech Highlights:
 
 This proof of concept Python script allows for third party control of the controller, bypassing the requirement to use the official Grainfather application.  This therefore opens up the Connect controller to other brewing applications and custom automation.
 
+
+
+Command list so far:
+
+- Timer set: Sx where x = mins to set - example: S1 for 1 minute timer, S5 for five minute timer.
+
+- Cancel: C0
+
+- Pause or resume: G
+
+- Temp up: U
+
+- Temp down: D
+
+- Heat on/off toggle: H
+
+- Pump on/off toggle: P
+
+- Temperature set point: $X, where X = temp value. Note the trailing comma - example: to set target temp to 70C, $70,
+
+- Delayed heating: Bx,y, where x = minutes, y = seconds. use C0 to cancel this function. Example: B2,0,
+
+- Set button press: T
+
+
 <b> ********************* Work-in-progress code - Use at your own risk! ********************* </b>
 
 
