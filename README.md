@@ -5,14 +5,20 @@ GF Connect Bluetooth Controller Proof of concept
 
 
 ### Prerequisites
+
+```
 Raspberry Pi (v2 with bluetooth dongle, V3) or Linux host
-
+```
+```
 Libs/packages: Bluez, bluepy, Python
-
+```
 
 ### Installation/Set Up
 
+```
 TBD
+```
+
 
 ### Work To be done
 
