@@ -4,10 +4,15 @@ GF Connect Bluetooth Controller Proof of concept
 
 ### Prerequisites
 Raspberry Pi (v2 with bluetooth dongle, V3) or Linux host
+
 Libs/packages: Bluez, bluepy, Python
 
 
-<b> To be done: </b>
+### Installation/Set Up
+
+TBD
+
+### Work To be done
 
 More commands?
 
@@ -27,3 +32,8 @@ Node-red workflow
 * **Simon Taylor** - *Initial work* - [BladeRunner68](https://github.com/BladeRunner68)
 
 See also the list of [contributors](https://github.com/BladeRunner68/GFConnect/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
