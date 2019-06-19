@@ -48,6 +48,25 @@ Command list so far:
 - Set button press: T
 
 
+Outline Brew Schedule mode (Work in progress):
+
+ - Line 1 - Rboiltime,Number_of_Mash_steps, Mash_water_(L),Sparge_water_(L),
+
+ - Line 2 - Mash_included,sparge_included,0,0,
+
+ - Line 3 - brew_session_name
+
+ - Line 4 - hop_stand_mins,number_of_boil_additions,0,0 (TBC)
+
+ - Line 5 - boil_addition1_time_mins,
+
+ - Line 6 - boil_additionx_time_mins, (where needed - each hop addition adds a line and increments the number_of_boil_additions number)
+
+ - Line w - mast_temp,mash_time, (will be the last line if only 1 mash step)
+
+ - Line x - mash_out_temp,mash_out_time (if mash out needed)
+
+
 <b> ********************* Work-in-progress code - Use at your own risk! ********************* </b>
 
 
