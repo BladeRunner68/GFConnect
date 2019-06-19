@@ -21,7 +21,7 @@ Tech Highlights:
 - All commands are single line write requests and each request needs to contain 19 characters - padded out with spaces
 
 
-This proof of concept Python script allows for third party control of the controller, bypassing the requirement to use the official Grainfather application.  This therefore opens up the Connect controller to other brewing applications and custom automation.
+This proof of concept Python script allows for third party operation of the controller, bypassing the requirement to use the official Grainfather application.  This therefore opens up the Connect controller to other brewing applications and custom automation.
 
 
 
