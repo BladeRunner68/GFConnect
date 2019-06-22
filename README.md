@@ -47,14 +47,15 @@ Command list so far:
 
 - Set button press: T
 
+- Quit session: Q1
 
 Outline Brew Schedule mode (Work in progress):
 
  - Line 1 - Rboiltime,Number_of_Mash_steps, Mash_water_(L),Sparge_water_(L),
 
- - Line 2 - Mash_included,sparge_included,0,0,
+ - Line 2 - Mash_included,sparge_included,0,0,0,
 
- - Line 3 - brew_session_name
+ - Line 3 - brew_session_name - capical letters, 19 chars max
 
  - Line 4 - hop_stand_mins,number_of_boil_additions,0,0 (TBC)
 
