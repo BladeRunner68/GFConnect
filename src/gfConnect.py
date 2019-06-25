@@ -15,6 +15,7 @@
 #command list so far:
 #timer: Sx where x = mins to set - example: S1 for 1 minute timer, S5 for five minute timer.
 #cancel: C0
+#cancel timer: C
 #pause or resume: G
 #temp up: U
 #temp down: D
@@ -23,7 +24,10 @@
 #temp set point: $X, where X = temp value. Note the trailing comma - example: to set target temp to 70C, $70,
 #delayed heating: Bx,y, where x = minutes, y = seconds. use C0 to cancel this function. Example: B2,0,
 #set button press: T
-
+#skip to: NX,0,0,0,0,1, - where X is step number. Count mash steps, sparge,
+#                         boil and hopstand.  E.g. 3 mash steps (inc mash out), 
+#                         sparge, boil and hopstand: skip to hopstand would
+#                         be N6,0,0,0,0,1,
 
 #Status notifications:
 #T0,0,0,0,ZZZZZZZZ : timer?
@@ -43,14 +47,14 @@
 
 ### example recipe
 #"R90,2,17,15.3,", # 5 min boil, 2 mash steps, 17 mash water, 15.3 sparge
-#"0,0,1,0,0,",  # FIXME: what does this mean
+#"0,0,1,0,0,",  # mash additions, sparge indicator off, sparge water remind on
 #"RECIPEE RECIPEE REC", # Recipe name, max 19 chars, capital letters
-#"22,3,0,0,", # 22 min hopstand, 3 boil additions, FIXME: remaining means?
+#"22,3,1,0,", # 22 min hopstand, 3 boil additions, boil control active
 #"60,",       # first boil addition
 #"15,",       # second boil addition
 #"10,",       # third boil addition
-#"23:1,",    # first mash step
-#"23:1,"]    # second mash step
+#"23:1,",     # first mash step
+#"23:1,"      # second mash step
  
 ###other stuff to be confirmed:
 
@@ -58,6 +62,7 @@
 # simple inquiry example
 
 # "c2" : sets target to 0C and displays heat bar in display, not sure why.
+
 
 import bluepy.btle as btle
 import sys
@@ -111,6 +116,8 @@ class Grainfather:
     self.periphial = None
     self.writechar = None
     self.notifychar = None
+    self.mashsteps = 0
+    self.hopstand = 0
 
   def write(self, cmd):
     if self.periphial:
@@ -119,10 +126,10 @@ class Grainfather:
   # FIXME: subscription not figured out yet
   def subscribe(self):
     if self.periphial:
-      handle = self.notifychar.getHandle() + 1
+      handle = self.writechar.valHandle + 1
       self.periphial.writeCharacteristic(handle, 
-        b"\x02\x02\x00\x09\x00\x05\x00\x04\x00\x12\x0f\x00\x01\x00")
-
+        b"\x01\x00")
+      # "\x05\x00\x04\x00\x12\x0f\x00\x01\x00"
       for i in range(10):
           self.periphial.waitForNotifications(1.0)
           time.sleep(0.1)
@@ -149,6 +156,9 @@ class Grainfather:
   def cancel(self):
     self.write("C0,")
 
+  def cancel_timer(self):
+    self.write("C")
+
   def pause(self):
     self.write("G")
 
@@ -170,6 +180,16 @@ class Grainfather:
   def press_set(self):
     self.write("P")
 
+  def skip_to_sparge(self):
+    self.write("N%i,0,0,0,0,1," % self.mashsteps + 1)
+
+  def skip_to_boil(self):
+    self.write("N%i,0,0,0,0,1," % self.mashsteps + 2)
+
+  def skip_to_hopstand(self):
+    if self.hopstand == 1:
+      self.write("N%i,0,0,0,0,1," % self.mashsteps + 3)
+
   def connect(self, mac=""):
     if mac:
       self.mac = mac
@@ -188,12 +208,16 @@ class Grainfather:
     self.disconnect()
 
   def set_recipe(self, name, boiltime, mashsteps, fillvol, spargevol,
-      boiladditions, hopstand=0, spargeindicator=1, wateradditions=1):
+      boiladditions, boilpowerctrl=1, hopstand=0, spargeindicator=1,
+      wateradditions=1, spargewaterremind=1):
+    self.mashsteps = len(mashsteps)
+    self.hopstand = hopstand
     cmds = ["R%i,%i,%.1f,%1f," % (boiltime, len(mashsteps), fillvol,
       spargevol)]
-    cmds.append("%i,%i,1,0,0," % (wateradditions, spargeindicator))
+    cmds.append("%i,%i,%i,0,0," % 
+            (wateradditions, spargeindicator, spargewaterremind))
     cmds.append(name[0:19].upper())
-    cmds.append("%i,%i,0,0," % (hopstand, len(boiladditions)))
+    cmds.append("%i,%i,%i,0," % (hopstand, len(boiladditions), boilpowerctrl))
     for a in boiladditions:
       cmds.append("%i," % a)
     for mashstep in mashsteps:
@@ -231,8 +255,9 @@ if __name__ == '__main__':
     fillvol = 16.7
     spargevol = 13.3
     boiladditions = (60, 30, 15)
-    gf.set_recipe(name, boiltime, mashsteps, fillvol, spargevol, boiladditions)
-    time.sleep(2)
+    gf.set_recipe(name, boiltime, mashsteps, fillvol, spargevol, boiladditions,
+            hopstand=10)
+    time.sleep(1)
 
   time.sleep(0.5)
   del(gf)
