@@ -33,6 +33,8 @@ Command list so far:
 
 - Pause or resume: G
 
+- Cancel timer: C
+
 - Temp up: U
 
 - Temp down: D
@@ -47,16 +49,19 @@ Command list so far:
 
 - Set button press: T
 
+- Quit session: Q1
+
+- Skip to step: Nx,0,0,0,0,1, - where x step number, e.g., mash1=1, mash2=2, mash out=3, sparge=4, boil=5, hopstand=6
 
 Outline Brew Schedule mode (Work in progress):
 
  - Line 1 - Rboiltime,Number_of_Mash_steps, Mash_water_(L),Sparge_water_(L),
 
- - Line 2 - Mash_included,sparge_included,0,0,
+ - Line 2 - water_attitions_included,sparge_indicator,sparge_heater_reminder,0,0,
 
- - Line 3 - brew_session_name
+ - Line 3 - brew_session_name - capical letters, 19 chars max
 
- - Line 4 - hop_stand_mins,number_of_boil_additions,0,0 (TBC)
+ - Line 4 - hop_stand_mins,number_of_boil_additions,boil_power_control,0 (TBC)
 
  - Line 5 - boil_addition1_time_mins,
 
